@@ -158,6 +158,28 @@ install_Tailscale() {
 	echo "Use tailscale up"
 
 }
+install_qbittorrent()
+{
+sudo tee -a /etc/systemd/system/qbittorrent.service >/dev/null <<EOF
+[Unit]
+Description=qBittorrent
+After=network.target
+
+[Service]
+Type=forking
+User=pi
+Group=pi
+UMask=002
+ExecStart=/usr/bin/qbittorrent-nox -d --webui-port=8113
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+sudo systemctl start qbittorrent
+sudo systemctl enable qbittorrent
+}
 
 # Main script execution
 echo "Raspberry pi Essential Script"
@@ -168,3 +190,4 @@ install_shairport
 install_raspotify
 install_zerotier
 install_Tailscale
+install_qbittorrent
