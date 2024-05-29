@@ -187,7 +187,7 @@ verify_os
 set_hostname
 install_software
 install_shairport
-install_raspotify
 install_zerotier
 install_Tailscale
 install_qbittorrent
+install_raspotify
